@@ -1,0 +1,2 @@
+import { z } from 'zod'; import { AppError } from '../utils/http.js';
+export const validate=(schema:z.ZodTypeAny,source:'body'|'query'|'params'='body')=>(req:any,_res:any,next:any)=>{const result=schema.safeParse(req[source]);if(!result.success)return next(new AppError(400,'VALIDATION_ERROR',result.error.issues.map((i:any)=>`${i.path.join('.')}: ${i.message}`).join('; ')));req[source]=result.data;next()};

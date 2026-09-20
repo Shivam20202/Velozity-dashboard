@@ -1,0 +1,1 @@
+Run `npm run prisma:migrate -w backend` to create the initial migration from schema.prisma. The repository intentionally keeps schema.prisma as the source of truth for this generated assessment project.
