@@ -23,11 +23,13 @@ const refreshCookie = "refresh_token";
 
 const cookieOptions = {
   httpOnly: true,
-  sameSite: env.NODE_ENV === "production" ? "none" as const : "lax" as const,
+  sameSite:
+    env.NODE_ENV === "production"
+      ? ("none" as const)
+      : ("lax" as const),
   secure: env.NODE_ENV === "production",
   path: "/api/auth",
-};;
-
+};
 router.post(
   "/login",
   asyncHandler(async (req, res) => {
