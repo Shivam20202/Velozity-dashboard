@@ -11,18 +11,23 @@ import {
 } from "../utils/jwt.js";
 import { env } from "../config/env.js";
 import { requireAuth } from "../middleware/auth.js";
+
 const router = Router();
+
 const login = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
+
 const refreshCookie = "refresh_token";
+
 const cookieOptions = {
   httpOnly: true,
-  sameSite: "lax" as const,
+  sameSite: env.NODE_ENV === "production" ? "none" as const : "lax" as const,
   secure: env.NODE_ENV === "production",
   path: "/api/auth",
-};
+};;
+
 router.post(
   "/login",
   asyncHandler(async (req, res) => {
